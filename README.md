@@ -1,20 +1,31 @@
-<div align="center">
-<img width="1200" height="475" alt="GHBanner" src="https://github.com/user-attachments/assets/0aa67016-6eaf-458a-adb2-6e31a0763ed6" />
-</div>
+# EcoBazaarX
 
-# Run and deploy your AI Studio app
+EcoBazaarX is a web application for eco-friendly shopping that includes secure authentication, a user dashboard, cart and wishlist features, and order management.
 
-This contains everything you need to run your app locally.
+## Tech Stack
+- React
+- TypeScript
+- Vite
+- React Router DOM
+- Tailwind CSS
+- Recharts
 
-View your app in AI Studio: https://ai.studio/apps/drive/1-_1XM_ASWFKR6QB4jswcQKoqrZMVckhU
+## Features
+- User login and signup
+- Protected routes
+- Dashboard
+- Cart and wishlist
+- Order history
+- Profile management
 
-## Run Locally
+## Setup
+```bash
+npm install
+npm run dev
+Build
+npm run build
+```
+Author
 
-**Prerequisites:**  Node.js
-
-
-1. Install dependencies:
-   `npm install`
-2. Set the `GEMINI_API_KEY` in [.env.local](.env.local) to your Gemini API key
-3. Run the app:
-   `npm run dev`
+Hari Krishna Tennati
+https://github.com/hariKrishnaTennati
