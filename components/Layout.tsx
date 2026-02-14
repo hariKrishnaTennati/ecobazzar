@@ -6,6 +6,9 @@ import { LogOut, Leaf, ShoppingCart, Heart, User as UserIcon, Clock, Info } from
 import { Link, useLocation } from 'react-router-dom';
 import ThreeBackground from './ThreeBackground';
 import gsap from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
+
+gsap.registerPlugin(ScrollTrigger);
 
 interface LayoutProps {
   children: React.ReactNode;
@@ -29,7 +32,33 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
         ease: 'power3.out'
       });
     }
-  }, []);
+
+    // Interactive Button/Link Hover Sound/Scale Logic
+    const buttons = document.querySelectorAll('button, a');
+    buttons.forEach(btn => {
+      btn.addEventListener('mouseenter', () => {
+        gsap.to(btn, { scale: 1.05, duration: 0.3, ease: 'power2.out' });
+      });
+      btn.addEventListener('mouseleave', () => {
+        gsap.to(btn, { scale: 1, duration: 0.3, ease: 'power2.out' });
+      });
+    });
+
+    // Simple smooth scroll reveal for sections
+    const sections = document.querySelectorAll('section, h2, .animate-stagger');
+    sections.forEach(sec => {
+      gsap.from(sec, {
+        opacity: 0,
+        y: 20,
+        duration: 1,
+        scrollTrigger: {
+          trigger: sec,
+          start: 'top 85%',
+          toggleActions: 'play none none none'
+        }
+      });
+    });
+  }, [location.pathname]);
 
   return (
     <div className="relative min-h-screen font-sans text-gray-900 overflow-x-hidden selection:bg-eco-200 selection:text-eco-900">

@@ -125,6 +125,3 @@ const History: React.FC = () => {
 };
 
 export default History;
-
-
-export default History;
