@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { HashRouter, Routes, Route, Navigate } from 'react-router-dom';
 import Login from './pages/Login';
 import Signup from './pages/Signup';
@@ -12,10 +12,11 @@ import Wishlist from './pages/Wishlist';
 import { AuthProvider, useAuth } from './services/authContext';
 import { CartProvider } from './services/cartContext';
 import { WishlistProvider } from './services/wishlistContext';
+import SplashScreen from './components/SplashScreen';
 
 const ProtectedRoute: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   const { user, loading } = useAuth();
-  
+
   if (loading) return <div className="min-h-screen flex items-center justify-center text-eco-600">Loading...</div>;
   if (!user) return <Navigate to="/login" replace />;
 
@@ -23,69 +24,72 @@ const ProtectedRoute: React.FC<{ children: React.ReactNode }> = ({ children }) =
 };
 
 const App: React.FC = () => {
+  const [showSplash, setShowSplash] = useState(true);
+
   return (
     <AuthProvider>
       <CartProvider>
         <WishlistProvider>
+          {showSplash && <SplashScreen onComplete={() => setShowSplash(false)} />}
           <HashRouter>
             <Routes>
               <Route path="/login" element={<Login />} />
               <Route path="/signup" element={<Signup />} />
-              <Route 
-                path="/dashboard" 
+              <Route
+                path="/dashboard"
                 element={
                   <ProtectedRoute>
                     <Dashboard />
                   </ProtectedRoute>
-                } 
+                }
               />
-              <Route 
-                path="/history" 
+              <Route
+                path="/history"
                 element={
                   <ProtectedRoute>
                     <History />
                   </ProtectedRoute>
-                } 
+                }
               />
-              <Route 
-                path="/about" 
+              <Route
+                path="/about"
                 element={
                   <ProtectedRoute>
                     <About />
                   </ProtectedRoute>
-                } 
+                }
               />
-              <Route 
-                path="/profile" 
+              <Route
+                path="/profile"
                 element={
                   <ProtectedRoute>
                     <Profile />
                   </ProtectedRoute>
-                } 
+                }
               />
-              <Route 
-                path="/cart" 
+              <Route
+                path="/cart"
                 element={
                   <ProtectedRoute>
                     <Cart />
                   </ProtectedRoute>
-                } 
+                }
               />
-              <Route 
-                path="/wishlist" 
+              <Route
+                path="/wishlist"
                 element={
                   <ProtectedRoute>
                     <Wishlist />
                   </ProtectedRoute>
-                } 
+                }
               />
-              <Route 
-                path="/order/:id" 
+              <Route
+                path="/order/:id"
                 element={
                   <ProtectedRoute>
                     <Order />
                   </ProtectedRoute>
-                } 
+                }
               />
               <Route path="*" element={<Navigate to="/dashboard" replace />} />
             </Routes>
